@@ -2,6 +2,7 @@ package dht;
 
 import org.junit.Test;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
@@ -15,7 +16,14 @@ public class RingTest {
     @Test
     public void shouldAddANode() {
         Ring ring = new Ring();
-        ring.add(new Object());
+        ring.addNode(new Node(0.5));
         assertFalse(ring.empty());
+    }
+
+    @Test
+    public void shouldAddNodeAndRetrieveIt() {
+        Ring ring = new Ring();
+        ring.store("key", "value");
+        assertEquals("value", ring.value("key"));
     }
 }
