@@ -1,5 +1,3 @@
-import java.util.Queue;
-
 public class Probability {
     public static final int CERTAINTY = 1;
     private double chance;
@@ -18,7 +16,7 @@ public class Probability {
         if (!(other instanceof Probability))
             return false;
 
-        return Math.abs(this.chance - chance) < IGNORED_DIFFERENCE;
+        return Math.abs(this.chance - ((Probability) other).chance) < IGNORED_DIFFERENCE;
     }
 
     public Probability not() {
