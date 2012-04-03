@@ -1,1 +1,22 @@
-Dev Boot Camp At TW
+####################
+# Dev Boot Camp At TW
+
+###
+# Job of a class
+A template that begins with '<Class> understands that ...', is used to define the job of a class
+Examples:
+triangle -
+A Triangle understands that it is a 3 sided figure
+
+car -
+A Car understands a vehicle that has four wheels and rides on a hard surface
+
+ship -
+A Ship understands a vehicle of large carrying capacity, that rides on water
+
+super market -
+A SuperMarket understands a storage of number of different salable commodities that users can browse through and add to their cart
+the ability for users to browse through
+
+probability -
+A Probability understands a likeliness of an event to occur
