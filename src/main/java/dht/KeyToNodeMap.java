@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class KeyToNodeMap {
-    public final List<Node> nodes;
+    private final List<Node> nodes;
 
     public KeyToNodeMap(List<Node> nodes) {
         this.nodes = nodes;

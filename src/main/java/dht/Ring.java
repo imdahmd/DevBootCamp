@@ -7,9 +7,11 @@ import java.util.List;
 // Understands the distribution of nodes in the DHT
 public class Ring {
     private List<Node> nodes;
+    private KeyToNodeMap nodeMap;
 
     public Ring() {
         nodes = new ArrayList<Node>();
+        nodeMap = new KeyToNodeMap(nodes);
     }
 
     public boolean empty() {
@@ -22,12 +24,10 @@ public class Ring {
     }
 
     public void store(String key, Object value) {
-        KeyToNodeMap map = new KeyToNodeMap(this.nodes);
-        map.nodeFor(key).store(key, value);
+        nodeMap.nodeFor(key).store(key, value);
     }
 
     public Object value(String key) {
-        KeyToNodeMap map = new KeyToNodeMap(this.nodes);
-        return map.nodeFor(key).value(key);
+        return nodeMap.nodeFor(key).value(key);
     }
 }
