@@ -9,15 +9,17 @@ import static junit.framework.Assert.assertEquals;
 public class KeyToNodeMapTest {
     @Test
     public void shouldReturnNodeForKey() {
-        Node[] nodes = {new Node(0.3),new Node(0.5)};
+        Node expectedNode = new Node(0.5);
+        Node[] nodes = {new Node(0.3), expectedNode};
         KeyToNodeMap keyToNodeMap = new KeyToNodeMap(Arrays.asList(nodes));
-        assertEquals(0.5, keyToNodeMap.nodeFor("key").index);
+        assertEquals(expectedNode, keyToNodeMap.nodeFor("key"));
     }
 
     @Test
     public void shouldWrapToFirstNodeForKeyThatIsNotEvenMappingToLargestNode() {
-        Node[] nodes = {new Node(0.1),new Node(0.3)};
+        Node expectedNode = new Node(0.1);
+        Node[] nodes = {expectedNode,new Node(0.3)};
         KeyToNodeMap keyToNodeMap = new KeyToNodeMap(Arrays.asList(nodes));
-        assertEquals(0.1, keyToNodeMap.nodeFor("key").index);
+        assertEquals(expectedNode, keyToNodeMap.nodeFor("key"));
     }
 }

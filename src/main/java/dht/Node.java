@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Node implements Comparable<Node>{
     private Map<String, Object> store;
-    public final double index;
+    private final double index;
 
     public Node(double index) {
         this.index = index;
@@ -39,5 +39,9 @@ public class Node implements Comparable<Node>{
                 remove(key);
             }
         }
+    }
+
+    public double index() {
+        return index;
     }
 }

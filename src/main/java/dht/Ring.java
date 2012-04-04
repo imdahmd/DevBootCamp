@@ -8,8 +8,14 @@ import java.util.List;
 public class Ring {
     private List<Node> nodes;
     private KeyToNodeMap nodeMap;
+    private int replicationOrder;
 
     public Ring() {
+        this(0);
+    }
+
+    public Ring(int replicationOrder) {
+        this.replicationOrder = replicationOrder;
         nodes = new ArrayList<Node>();
         nodeMap = new KeyToNodeMap(nodes);
     }
@@ -31,7 +37,16 @@ public class Ring {
     }
 
     public void store(String key, Object value) {
-        nodeMap.nodeFor(key).store(key, value);
+        if(nodes.isEmpty()){
+            throw new IllegalStateException();
+        }
+        Node node = nodeMap.nodeFor(key);
+        node.store(key, value);
+
+        for(int i = 0; i < replicationOrder; ++i){
+            node = nextTo(node);
+            node.store(key, value);
+        }
     }
 
     public Object value(String key) {
@@ -39,6 +54,16 @@ public class Ring {
     }
 
     public void remove(String key) {
-        nodeMap.nodeFor(key).remove(key);
+        Node node = nodeMap.nodeFor(key);
+        node.remove(key);
+
+        for(int i = 0; i < replicationOrder; ++i){
+            node = nextTo(node);
+            node.remove(key);
+        }
+    }
+
+    public void removeNode(Node node) {
+        nodes.remove(node);
     }
 }
