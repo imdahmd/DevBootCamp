@@ -32,6 +32,7 @@ public class KeyToNodeMap {
         int place = Collections.binarySearch(nodes, new Node(positionForKey));
         if(place < 0){
             place = (place * -1) - 1;
+            place = (place == nodes.size()) ? 0 : place;
         }
         return nodes.get(place);
     }

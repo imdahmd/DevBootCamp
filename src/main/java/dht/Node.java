@@ -1,6 +1,7 @@
 package dht;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class Node implements Comparable<Node>{
@@ -22,5 +23,21 @@ public class Node implements Comparable<Node>{
 
     public int compareTo(Node node) {
         return ((Double)index).compareTo(node.index);
+    }
+
+    public void remove(String key) {
+        store.put(key, null);
+    }
+
+    public void distributeTo(Node newNode, KeyToNodeMap nodeMap) {
+        Iterator<String> keys = store.keySet().iterator();
+        while(keys.hasNext()){
+            String key = keys.next();
+            Node nodeForKey = nodeMap.nodeFor(key);
+            if(nodeForKey.equals(newNode)){
+                newNode.store(key, value(key));
+                remove(key);
+            }
+        }
     }
 }

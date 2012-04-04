@@ -18,9 +18,16 @@ public class Ring {
         return nodes.size() == 0;
     }
 
-    public void addNode(Node node) {
-        nodes.add(node);
+    public void addNode(Node newNode) {
+        nodes.add(newNode);
         Collections.sort(nodes);
+
+        nextTo(newNode).distributeTo(newNode, nodeMap);
+    }
+
+    private Node nextTo(Node node) {
+        int curNodeI = nodes.indexOf(node);
+        return nodes.get(curNodeI == nodes.size() - 1 ? 0 : curNodeI + 1);
     }
 
     public void store(String key, Object value) {
@@ -29,5 +36,9 @@ public class Ring {
 
     public Object value(String key) {
         return nodeMap.nodeFor(key).value(key);
+    }
+
+    public void remove(String key) {
+        nodeMap.nodeFor(key).remove(key);
     }
 }

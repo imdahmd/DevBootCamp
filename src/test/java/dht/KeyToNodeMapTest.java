@@ -13,4 +13,11 @@ public class KeyToNodeMapTest {
         KeyToNodeMap keyToNodeMap = new KeyToNodeMap(Arrays.asList(nodes));
         assertEquals(0.5, keyToNodeMap.nodeFor("key").index);
     }
+
+    @Test
+    public void shouldWrapToFirstNodeForKeyThatIsNotEvenMappingToLargestNode() {
+        Node[] nodes = {new Node(0.1),new Node(0.3)};
+        KeyToNodeMap keyToNodeMap = new KeyToNodeMap(Arrays.asList(nodes));
+        assertEquals(0.1, keyToNodeMap.nodeFor("key").index);
+    }
 }
